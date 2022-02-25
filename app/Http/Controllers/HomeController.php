@@ -19,22 +19,22 @@ class HomeController extends Controller
         return view('home', ['rss' => $rss]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         // Add RSS to db
     }
 
-    public function read()
+    public function read(Request $request)
     {
         // Get news from database
     }
 
-    public function update()
+    public function update(Request $request)
     {
         // Update database news based on RSS's
     }
 
-    public function delete()
+    public function delete(Request $request)
     {
         // Delete RSS from db
     }
