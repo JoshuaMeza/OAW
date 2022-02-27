@@ -1,4 +1,5 @@
 const selectionBox = document.getElementById('sort-selection');
+const searchContent = document.getElementById('search-content');
 
 class New {
     constructor(title, date, url, description, categories) {
@@ -17,7 +18,7 @@ class New {
     }
 }
 
-const sortNews = function(){
+const sortNews = function(news){
     selectionValue = selectionBox.value;
     switch(selectionValue){
         case "title": 
@@ -74,12 +75,12 @@ const sortNews = function(){
 }
 
 selectionBox.addEventListener('change', function(){
-    sortNews();
+    sortNews(news);
     showNews(news);
 });
 
 function showNews(news) {
-    sortNews();
+    sortNews(news);
     var outputBox = $("#news-box");
     //  Eliminamos los hijos del div para volverlos a mostrar
     outputBox.empty();
@@ -88,6 +89,30 @@ function showNews(news) {
         outputBox.append(element.toString());
     });
 }
+
+searchContent.addEventListener('keyup', function(){
+    var text = searchContent.value.toLowerCase();
+    var outputBox = $("#news-box");
+    //  Eliminamos los hijos del div para volverlos a mostrar
+    outputBox.empty();
+    var newsTemp = [];
+
+    for(let newItem of news){
+        title = newItem.title.toLowerCase();
+        date = newItem.date.toLowerCase();
+        url = newItem.url.toLowerCase();
+        description = newItem.description.toLowerCase();
+        categories = newItem.categories.toLowerCase();
+        if(title.indexOf(text) !== -1 || date.indexOf(text) !== -1
+            || url.indexOf(text) !== -1 || description.indexOf(text) !== -1
+            || categories.indexOf(text) !== -1){
+            outputBox.append(newItem.toString());
+            newsTemp.push(newItem);
+        }
+    }
+    sortNews(newsTemp);
+
+})
 
 // TEST: STATIC NEWS AND SHOW THEM
 //  Formato de fecha: YYYY/MM/DD
