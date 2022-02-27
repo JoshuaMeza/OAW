@@ -19,55 +19,57 @@ class New {
 
 const sortNews = function(){
     selectionValue = selectionBox.value;
-
-    if(selectionValue == "title"){
-        news.sort((object1, object2) =>{
-            if(object1.title < object2.title){
-                return -1;
-            } else if(object1.title > object2.title){
-                return 1;
-            } else return 0;
-        });
-    }
-
-    if(selectionValue == "url"){
-        news.sort((object1, object2) =>{
-            if(object1.url < object2.url){
-                return -1;
-            } else if(object1.url > object2.url){
-                return 1;
-            } else return 0;
-        });
-    }
-
-    if(selectionValue == "description"){
-        news.sort((object1, object2) =>{
-            if(object1.description < object2.description){
-                return -1;
-            } else if(object1.description > object2.description){
-                return 1;
-            } else return 0;
-        });
-    }
-
-    if(selectionValue == "date"){
-        news.sort((object1, object2) =>{
-            if(object1.date < object2.date){
-                return -1;
-            } else if(object1.date > object2.date){
-                return 1;
-            } else return 0;
-        });
-    }
-
-    if(selectionValue == "categories"){
-        news.sort((object1, object2) =>{
-            if(object1.categories < object2.categories){
-                return -1;
-            } else if(object1.categories > object2.categories){
-                return 1;
-            } else return 0;
-        });
+    switch(selectionValue){
+        case "title": 
+            news.sort((object1, object2) =>{
+                if(object1.title < object2.title){
+                    return -1;
+                } else if(object1.title > object2.title){
+                    return 1;
+                } else return 0;
+            });
+            break;
+        case "url": 
+            news.sort((object1, object2) =>{
+                if(object1.url < object2.url){
+                    return -1;
+                } else if(object1.url > object2.url){
+                    return 1;
+                } else return 0;
+            });
+            break;
+        case "description":
+            news.sort((object1, object2) =>{
+                if(object1.description < object2.description){
+                    return -1;
+                } else if(object1.description > object2.description){
+                    return 1;
+                } else return 0;
+            });
+            break;
+        case "date":
+            news.sort((object1, object2) =>{
+                date1 = new Date(object1.date);
+                date2 = new Date(object2.date);
+                if(date1 < date2){
+                    return -1;
+                } else if(date1 > date2){
+                    return 1;
+                } else return 0;
+            });
+            break;
+        case "categories":
+            if(selectionValue == "categories"){
+                news.sort((object1, object2) =>{
+                    if(object1.categories < object2.categories){
+                        return -1;
+                    } else if(object1.categories > object2.categories){
+                        return 1;
+                    } else return 0;
+                });
+            }
+            break;
+        
     }
 }
 
@@ -88,10 +90,11 @@ function showNews(news) {
 }
 
 // TEST: STATIC NEWS AND SHOW THEM
+//  Formato de fecha: YYYY/MM/DD
 news = [];
-news[0] = new New("Reunión de preparatorianos en torno al deporte", "26/02/22", "www.uady.com", "Celebran la tradicional carrera “Vuelve a Casa”", "Espectaculos, Tecnologia");
-news[1] = new New("Firma de convenio con la CANIRAC Yucatán", "12/02/22", "www.modelo.com", "Convenio de colaboración entre nuestra institución y la Cámara Nacional de la Industria de Restaurantes y Alimentos Condimentados delegación Yucatán", "Espectaculos");
-news[2] = new New("Creatividad con reciclaje: The Precious Plastic Universe", "23/01/22", "www.anahuac.com", "El reciclaje puede hacer una gran diferencia para que nuestro mundo sea más sustentable. Y con ayuda de la creatividad se pueden explorar alternativas para la reutilización del plástico en el campo del diseño.", "Tecnologia");
+news[0] = new New("Reunión de preparatorianos en torno al deporte", "2022/02/26", "www.uady.com", "Celebran la tradicional carrera “Vuelve a Casa”", "Espectaculos, Tecnologia");
+news[1] = new New("Firma de convenio con la CANIRAC Yucatán", "2022/02/12", "www.modelo.com", "Convenio de colaboración entre nuestra institución y la Cámara Nacional de la Industria de Restaurantes y Alimentos Condimentados delegación Yucatán", "Espectaculos");
+news[2] = new New("Creatividad con reciclaje: The Precious Plastic Universe", "2022/01/23", "www.anahuac.com", "El reciclaje puede hacer una gran diferencia para que nuestro mundo sea más sustentable. Y con ayuda de la creatividad se pueden explorar alternativas para la reutilización del plástico en el campo del diseño.", "Tecnologia");
 
 // Once news are obtained and sorted, call this function
 showNews(news);
