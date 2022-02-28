@@ -110,7 +110,10 @@ searchContent.addEventListener('keyup', function(){
             newsTemp.push(newItem);
         }
     }
-    sortNews(newsTemp);
+
+    if(newsTemp.length == 0){
+        showAlert("No se ha encontrado ninguna coincidencia, intente nuevamente.", "error");
+    } else sortNews(newsTemp);
 
 })
 
