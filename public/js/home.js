@@ -1,5 +1,7 @@
 const selectionBox = document.getElementById('sort-selection');
 const searchContent = document.getElementById('search-content');
+const btnAddNew = document.getElementById('btnAddNew');
+const RSSLink = document.getElementById('RSSLink');
 
 class New {
     constructor(title, date, url, description, categories) {
@@ -115,6 +117,16 @@ searchContent.addEventListener('keyup', function(){
         showAlert("No se ha encontrado ninguna coincidencia, intente nuevamente.", "error");
     } else sortNews(newsTemp);
 
+});
+
+btnAddNew.addEventListener('click', function(e){
+    if(RSSLink.value.length == 0){
+        showAlert("Debe proporcionar una url.", "error");
+        e.preventDefault();
+    }
+    // else{
+    //     Código para añadir en enlace
+    // }
 })
 
 // TEST: STATIC NEWS AND SHOW THEM

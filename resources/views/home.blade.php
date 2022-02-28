@@ -24,8 +24,8 @@
                 <form id="create">
                     @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enlace de RSS">
-                        <button type="submit" class="btn btn-success">Añadir</button>
+                        <input type="text" class="form-control" placeholder="Enlace de RSS" id="RSSLink">
+                        <button type="submit" class="btn btn-success" id="btnAddNew">Añadir</button>
                     </div>
                 </form>
             </div>
