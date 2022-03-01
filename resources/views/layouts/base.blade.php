@@ -18,9 +18,12 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}">Noticias</a>
+            <a class="navbar-brand" href="#">
+            <img src="./favicon.png" alt="" class="d-inline-block align-text-top">
+            <span class="navbar-brand mb-0 h1">Noticias</span>
+            </a>
         </div>
     </nav>
     <!-- Content -->
