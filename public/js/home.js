@@ -2,6 +2,8 @@ const selectionBox = document.getElementById('sort-selection');
 const searchContent = document.getElementById('search-content');
 const btnAddNew = document.getElementById('btnAddNew');
 const RSSLink = document.getElementById('RSSLink');
+const btnUpdate = document.getElementById('btnUpdate');
+const spinnerUpdate = document.getElementById('spinnerUpdate');
 
 class New {
     constructor(title, date, url, description, categories) {
@@ -127,6 +129,13 @@ btnAddNew.addEventListener('click', function(e){
     // else{
     //     Código para añadir en enlace
     // }
+})
+
+btnUpdate.addEventListener('click', function(){
+    spinnerUpdate.style.visibility = "visible";
+    setTimeout(function(){
+        spinnerUpdate.style.visibility = "hidden";
+    }, 2500);
 })
 
 // TEST: STATIC NEWS AND SHOW THEM

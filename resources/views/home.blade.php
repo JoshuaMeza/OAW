@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="./css/home.css">
 @endsection
 @section('content')
-    <div id="carouselExampleDark" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
+        <div class="carousel-inner" style="background-color: rgb(100, 100, 100); background-blend-mode: soft-light;">
             <div class="carousel-item active" data-bs-interval="10000">
                 <a href="https://uady.mx/#/noticias/url/reunion-de-preparatorianos-en-torno-al-deporte-uady" target="_blanck">
-                    <img src="./img/img1.jpg" class="d-block w-100" alt="noticia1" style="opacity: 0.7;">
+                    <img src="./img/img1.jpg" class="d-block w-100" alt="noticia1" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h4>Celebran la tradicional carrera “Vuelve a Casa”</h4>
@@ -26,7 +26,7 @@
             </div>
             <div class="carousel-item" data-bs-interval="2000">
                 <a href="https://uady.mx/#/noticias/url/deportistas-festejan-centenario-de-la-uady" target="_blanck">
-                    <img src="./img/img2.png" class="d-block w-100" alt="noticia2" style="opacity: 0.7;">
+                    <img src="./img/img2.png" class="d-block w-100" alt="noticia2" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h4>Nutrida participación en tradicional carrera</h4>
@@ -34,18 +34,18 @@
             </div>
             <div class="carousel-item">
                 <a href="https://uady.mx/#/noticias/url/es-necesario-repensar-la-educacion-y-su-sistema-williams-uady" target="_blanck">
-                    <img src="./img/img3.png" class="d-block w-100" alt="noticia3" style="opacity: 0.7;">
+                    <img src="./img/img3.png" class="d-block w-100" alt="noticia3" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h4>Destaca el rector los retos académicos para un nuevo siglo</h4>
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -58,9 +58,12 @@
 
             <!-- Update and add button -->
             <div class="container-fluid mb-3 d-flex justify-content-evenly">
+                <div class="spinner-border text-primary" role="status" style="visibility: hidden;" id="spinnerUpdate">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
                 <form id="update">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar</button>
                 </form>
                 <form id="create">
                     @csrf
