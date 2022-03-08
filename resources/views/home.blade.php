@@ -62,10 +62,14 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
                 <form id="update">
+                <div class="spinner-border text-primary" role="status" style="visibility: hidden;" id="spinnerUpdate">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <form action="" method="post" id="update">
                     @csrf
                     <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar</button>
                 </form>
-                <form id="create">
+                <form id="create" action="" method="post">
                     @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enlace de RSS" id="RSSLink">
@@ -87,12 +91,13 @@
                     <tbody>
                         <?php
                         foreach ($rss as $register) {
+                            if($register!=''){
                     ?>
                         <tr>
                             <th scope="row"><?php echo $register['id']; ?></th>
                             <td><?php echo $register['link']; ?></td>
                             <td>
-                                <form class="delete-form">
+                                <form class="delete-form" action="" method="post">
                                     @csrf
                                     <input type="hidden" name="link-id" value="<?php echo $register['id']; ?>">
                                     <button type="submit" class="btn btn-outline-danger">
@@ -104,6 +109,7 @@
                             </td>
                         </tr>
                         <?php
+                            }
                         }
                     ?>
                     </tbody>
