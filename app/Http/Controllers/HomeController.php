@@ -3,39 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Posts;
 
 class HomeController extends Controller
 {
     public function index()
     {
         // Retrieve RSS sources
-        $rss = [];
 
         // TEST: ADD SOME STATIC RSS SOURCES
-        $rss[] = ['id' => 0, 'link' => 'http://rss.cnn.com/rss/cnn_latest.rss'];
-        $rss[] = ['id' => 1, 'link' => 'http://www.bbc.co.uk/mundo/temas/internacional/index.xml'];
+        $rss['register']=Posts::paginate(5);
 
         // Output
-        return view('home', ['rss' => $rss]);
+        return view('home', ['register'=>$rss]);
     }
 
     public function create(Request $request)
     {
-        // Add RSS to db
+        $datosRss = request()->except('_token');
+        Posts::insert($datosRss);
+        return response()->setStatusCode(200);
     }
 
     public function read(Request $request)
     {
-        // Get news from database
+        $datosRss = Posts::except(['_token','_method']);
+        return view('home',['register'=>$rss]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // Update database news based on RSS's
+        $datosRss = request()->except(['_token','_method']);
+        Posts::where('id','=',$id)->update(rss);
+        $register=Posts::findOrFail($id);
+        return view('home',['register'=>$rss]);
     }
 
-    public function delete(Request $request)
+    public function delete($id)
     {
-        // Delete RSS from db
+        Posts::destroy($id);
+        response()->setStatusCode(200);
+        return redirect('');
     }
+
 }

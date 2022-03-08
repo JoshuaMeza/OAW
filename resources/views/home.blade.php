@@ -17,11 +17,18 @@
 
             <!-- Update and add button -->
             <div class="container-fluid mb-3 d-flex justify-content-evenly">
+<<<<<<< Updated upstream
                 <form id="update">
+=======
+                <div class="spinner-border text-primary" role="status" style="visibility: hidden;" id="spinnerUpdate">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <form action="" method="post" id="update">
+>>>>>>> Stashed changes
                     @csrf
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
-                <form id="create">
+                <form id="create" action="" method="post">
                     @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Enlace de RSS">
@@ -42,13 +49,13 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($rss as $register) {
+                        foreach ($register as $rss) {
                     ?>
                         <tr>
                             <th scope="row"><?php echo $register['id']; ?></th>
                             <td><?php echo $register['link']; ?></td>
                             <td>
-                                <form class="delete-form">
+                                <form class="delete-form" action="" method="post">
                                     @csrf
                                     <input type="hidden" name="link-id" value="<?php echo $register['id']; ?>">
                                     <button type="submit" class="btn btn-outline-danger">
