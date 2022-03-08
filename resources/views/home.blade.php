@@ -17,14 +17,11 @@
 
             <!-- Update and add button -->
             <div class="container-fluid mb-3 d-flex justify-content-evenly">
-<<<<<<< Updated upstream
                 <form id="update">
-=======
                 <div class="spinner-border text-primary" role="status" style="visibility: hidden;" id="spinnerUpdate">
                     <span class="visually-hidden">Loading...</span>
                 </div>
                 <form action="" method="post" id="update">
->>>>>>> Stashed changes
                     @csrf
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
@@ -49,7 +46,8 @@
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($register as $rss) {
+                        foreach ($rss as $register) {
+                            if($register!=''){
                     ?>
                         <tr>
                             <th scope="row"><?php echo $register['id']; ?></th>
@@ -71,6 +69,7 @@
                             </td>
                         </tr>
                         <?php
+                            }
                         }
                     ?>
                     </tbody>
