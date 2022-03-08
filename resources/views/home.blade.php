@@ -9,23 +9,67 @@
     <link rel="stylesheet" href="./css/home.css">
 @endsection
 @section('content')
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner" style="background-color: rgb(100, 100, 100); background-blend-mode: soft-light;">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <a href="https://uady.mx/#/noticias/url/reunion-de-preparatorianos-en-torno-al-deporte-uady" target="_blanck">
+                    <img src="./img/img1.jpg" class="d-block w-100" alt="noticia1" style="opacity: 0.5;">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h4>Celebran la tradicional carrera “Vuelve a Casa”</h4>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="https://uady.mx/#/noticias/url/deportistas-festejan-centenario-de-la-uady" target="_blanck">
+                    <img src="./img/img2.png" class="d-block w-100" alt="noticia2" style="opacity: 0.5;">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h4>Nutrida participación en tradicional carrera</h4>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href="https://uady.mx/#/noticias/url/es-necesario-repensar-la-educacion-y-su-sistema-williams-uady" target="_blanck">
+                    <img src="./img/img3.png" class="d-block w-100" alt="noticia3" style="opacity: 0.5;">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h4>Destaca el rector los retos académicos para un nuevo siglo</h4>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
     <div class="container">
-        <h1 class="text-center my-3">¡Bandeja de noticias personalizables!</h1>
+
+    <br><br>
 
         <section>
-            <h2 class="text-center mb-3">Fuentes de noticias</h2>
 
             <!-- Update and add button -->
             <div class="container-fluid mb-3 d-flex justify-content-evenly">
+                <div class="spinner-border text-primary" role="status" style="visibility: hidden;" id="spinnerUpdate">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
                 <form id="update">
                     @csrf
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar</button>
                 </form>
                 <form id="create">
                     @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enlace de RSS">
-                        <button type="submit" class="btn btn-success">Añadir</button>
+                        <input type="text" class="form-control" placeholder="Enlace de RSS" id="RSSLink">
+                        <button type="submit" class="btn btn-success" id="btnAddNew">Añadir</button>
                     </div>
                 </form>
             </div>
@@ -52,13 +96,9 @@
                                     @csrf
                                     <input type="hidden" name="link-id" value="<?php echo $register['id']; ?>">
                                     <button type="submit" class="btn btn-outline-danger">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                            class="bi bi-x-circle" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                            <path
-                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                        </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                    </svg>
                                     </button>
                                 </form>
                             </td>
