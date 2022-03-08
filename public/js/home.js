@@ -5,6 +5,10 @@ const RSSLink = document.getElementById('RSSLink');
 const btnUpdate = document.getElementById('btnUpdate');
 const spinnerUpdate = document.getElementById('spinnerUpdate');
 
+// TEST: STATIC NEWS AND SHOW THEM
+//  Formato de fecha: YYYY/MM/DD
+var news = [];
+
 class New {
     constructor(title, date, url, description, categories) {
         this.title = title;
@@ -21,6 +25,16 @@ class New {
         '</a></div></div></div>';
     }
 }
+
+//  Noticias de ejemplo
+// news[0] = new New("Reunión de preparatorianos en torno al deporte", "2022/02/26", "www.uady.com", "Celebran la tradicional carrera “Vuelve a Casa”", "Espectaculos, Tecnologia");
+// news[1] = new New("Firma de convenio con la CANIRAC Yucatán", "2022/02/12", "www.modelo.com", "Convenio de colaboración entre nuestra institución y la Cámara Nacional de la Industria de Restaurantes y Alimentos Condimentados delegación Yucatán", "Espectaculos");
+// news[2] = new New("Creatividad con reciclaje: The Precious Plastic Universe", "2022/01/23", "www.anahuac.com", "El reciclaje puede hacer una gran diferencia para que nuestro mundo sea más sustentable. Y con ayuda de la creatividad se pueden explorar alternativas para la reutilización del plástico en el campo del diseño.", "Tecnologia");
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    sortNews(news);
+});
 
 const sortNews = function(news){
     selectionValue = selectionBox.value;
@@ -76,25 +90,39 @@ const sortNews = function(news){
             break;
         
     }
+    showNews(news);
 }
 
 selectionBox.addEventListener('change', function(){
-    sortNews(news);
-    showNews(news);
+    console.log(searchContent.value.toLowerCase().length);
+    console.log(news.length);
+    if(searchContent.value.toLowerCase().length > 0){
+        filterNews();
+    }
+    else
+        sortNews(news);
 });
 
 function showNews(news) {
-    sortNews(news);
     var outputBox = $("#news-box");
     //  Eliminamos los hijos del div para volverlos a mostrar
     outputBox.empty();
 
-    news.forEach(element => {
+    if(news.length > 0){
+        news.forEach(element => {
         outputBox.append(element.toString());
-    });
+        }); 
+    } else{
+        showAlert("No se ha encontrado ninguna noticia, favor de añadir una url de algún feed.", "error");
+    }
+
 }
 
 searchContent.addEventListener('keyup', function(){
+    filterNews();
+});
+
+const filterNews = function(){
     var text = searchContent.value.toLowerCase();
     var outputBox = $("#news-box");
     //  Eliminamos los hijos del div para volverlos a mostrar
@@ -119,7 +147,7 @@ searchContent.addEventListener('keyup', function(){
         showAlert("No se ha encontrado ninguna coincidencia, intente nuevamente.", "error");
     } else sortNews(newsTemp);
 
-});
+};
 
 btnAddNew.addEventListener('click', function(e){
     if(RSSLink.value.length == 0){
@@ -138,12 +166,3 @@ btnUpdate.addEventListener('click', function(){
     }, 2500);
 })
 
-// TEST: STATIC NEWS AND SHOW THEM
-//  Formato de fecha: YYYY/MM/DD
-news = [];
-news[0] = new New("Reunión de preparatorianos en torno al deporte", "2022/02/26", "www.uady.com", "Celebran la tradicional carrera “Vuelve a Casa”", "Espectaculos, Tecnologia");
-news[1] = new New("Firma de convenio con la CANIRAC Yucatán", "2022/02/12", "www.modelo.com", "Convenio de colaboración entre nuestra institución y la Cámara Nacional de la Industria de Restaurantes y Alimentos Condimentados delegación Yucatán", "Espectaculos");
-news[2] = new New("Creatividad con reciclaje: The Precious Plastic Universe", "2022/01/23", "www.anahuac.com", "El reciclaje puede hacer una gran diferencia para que nuestro mundo sea más sustentable. Y con ayuda de la creatividad se pueden explorar alternativas para la reutilización del plástico en el campo del diseño.", "Tecnologia");
-
-// Once news are obtained and sorted, call this function
-showNews(news);
