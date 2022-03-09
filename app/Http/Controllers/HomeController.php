@@ -83,5 +83,16 @@ class HomeController extends Controller
     public function delete(Request $request)
     {
         // Delete RSS from db
+        $input = $request->collect();
+
+        if ($input['id']) {
+            $deleted = DB::table('rsses')->where('id', '=', $input['id'])->delete();
+
+            return response("", 200)
+                ->header('Content-Type', 'text/plain');
+        }
+
+        return response("", 500)
+            ->header('Content-Type', 'text/plain');
     }
 }
