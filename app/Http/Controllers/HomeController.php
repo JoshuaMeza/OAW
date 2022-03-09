@@ -3,53 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Posts;
+use App\Models\Rss;
+use App\Models\Noticia;
+use Illuminate\Support\Facades\DB;
+use SimplePie;
 
 class HomeController extends Controller
 {
     public function index()
-<<<<<<< Updated upstream
-    {   
-        $rss[]=Posts::paginate();
-        return view('home', ['rss'=>$rss]);
-=======
     {
         $rss['rss'] = Rss::orderBy('id', 'asc')->paginate();
         $news['news'] = Noticia::orderBy('date', 'asc')->paginate();
 
         // Output
         return view('home', $rss, $news);
->>>>>>> Stashed changes
     }
 
     public function create(Request $request)
     {
-        $rss = request()->except('_token');
-        Posts::insert($rss);
-        return response()->setStatusCode(200);
+        $input = $request->collect();
+
+        if ($input['url']) {
+            $id = DB::table('rsses')->insertGetId(
+                ['url' => $input['url']]
+            );
+
+            return response("", 200)
+                ->header('Content-Type', 'text/plain');
+        }
+
+        return response("", 500)
+            ->header('Content-Type', 'text/plain');
     }
 
     public function read(Request $request)
     {
-<<<<<<< Updated upstream
-        $rss = Posts::except(['_token','_method']);
-        return view('home',['rss'=>$rss]);
-=======
         $news['news'] = Noticia::orderBy('date', 'asc')->paginate();
 
         // Output
         return view('home', $news);
->>>>>>> Stashed changes
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-<<<<<<< Updated upstream
-        $rss = request()->except(['_token','_method']);
-        Posts::where('id','=',$id)->update(rss);
-        $register=Posts::findOrFail($id);
-        return view('home',['rss'=>$rss]);
-=======
         // Update database news based on RSS's
         $feed = new SimplePie();
         $responses = DB::table('rsses')->select('url')->get();
@@ -87,14 +83,21 @@ class HomeController extends Controller
 
         return response('', 500)
             ->header('Content-Type', 'text/plain');
->>>>>>> Stashed changes
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        Posts::destroy($id);
-        response()->setStatusCode(200);
-        return redirect('');
-    }
+        // Delete RSS from db
+        $input = $request->collect();
 
+        if ($input['id']) {
+            $deleted = DB::table('rsses')->where('id', '=', $input['id'])->delete();
+
+            return response("", 200)
+                ->header('Content-Type', 'text/plain');
+        }
+
+        return response("", 500)
+            ->header('Content-Type', 'text/plain');
+    }
 }

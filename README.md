@@ -36,6 +36,13 @@ Si no has instalado Laravel en tu computadora, sigue las instrucciones del sigui
     - `copy .env.example .env`
     - `php artisan key:generate`
     - `php artisan migrate`
+        - **Nota:** Será necesario haber creado el esquema `oaw` antes.
+
+### Actualización tras cambios
+
+1. Correr en el directorio del proyecto los siguientes comandos:
+    - `composer update`
+    - `php artisan migrate:fresh`
 
 ### Ejecutar
 

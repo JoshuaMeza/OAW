@@ -3,13 +3,7 @@ const searchContent = document.getElementById('search-content');
 const btnAddNew = document.getElementById('btnAddNew');
 const RSSLink = document.getElementById('RSSLink');
 const btnUpdate = document.getElementById('btnUpdate');
-<<<<<<< Updated upstream
-const spinnerUpdate = document.getElementById('spinnerUpdate');
-
-// TEST: STATIC NEWS AND SHOW THEM
-=======
 const news = [];
->>>>>>> Stashed changes
 //  Formato de fecha: YYYY/MM/DD
 
 class New {
@@ -29,16 +23,7 @@ class New {
     }
 }
 
-<<<<<<< Updated upstream
-//  Noticias de ejemplo
-// news[0] = new New("Reunión de preparatorianos en torno al deporte", "2022/02/26", "www.uady.com", "Celebran la tradicional carrera “Vuelve a Casa”", "Espectaculos, Tecnologia");
-// news[1] = new New("Firma de convenio con la CANIRAC Yucatán", "2022/02/12", "www.modelo.com", "Convenio de colaboración entre nuestra institución y la Cámara Nacional de la Industria de Restaurantes y Alimentos Condimentados delegación Yucatán", "Espectaculos");
-// news[2] = new New("Creatividad con reciclaje: The Precious Plastic Universe", "2022/01/23", "www.anahuac.com", "El reciclaje puede hacer una gran diferencia para que nuestro mundo sea más sustentable. Y con ayuda de la creatividad se pueden explorar alternativas para la reutilización del plástico en el campo del diseño.", "Tecnologia");
-
-
-=======
 listNews.data.forEach(element=>news.push(new New(element.title, element.date, element.url, element.description, element.categories)));
->>>>>>> Stashed changes
 document.addEventListener('DOMContentLoaded', function() {
     sortNews(news);
 });
@@ -46,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const sortNews = function(news){
     selectionValue = selectionBox.value;
     switch(selectionValue){
-        case "title": 
+        case "title":
             news.sort((object1, object2) =>{
                 if(object1.title < object2.title){
                     return -1;
@@ -55,7 +40,7 @@ const sortNews = function(news){
                 } else return 0;
             });
             break;
-        case "url": 
+        case "url":
             news.sort((object1, object2) =>{
                 if(object1.url < object2.url){
                     return -1;
@@ -95,14 +80,12 @@ const sortNews = function(news){
                 });
             }
             break;
-        
+
     }
     showNews(news);
 }
 
 selectionBox.addEventListener('change', function(){
-    console.log(searchContent.value.toLowerCase().length);
-    console.log(news.length);
     if(searchContent.value.toLowerCase().length > 0){
         filterNews();
     }
@@ -118,7 +101,7 @@ function showNews(news) {
     if(news.length > 0){
         news.forEach(element => {
         outputBox.append(element.toString());
-        }); 
+        });
     } else{
         showAlert("No se ha encontrado ninguna noticia, favor de añadir una url de algún feed.", "error");
     }
@@ -157,19 +140,44 @@ const filterNews = function(){
 };
 
 btnAddNew.addEventListener('click', function(e){
+    e.preventDefault();
+
     if(RSSLink.value.length == 0){
         showAlert("Debe proporcionar una url.", "error");
-        e.preventDefault();
+    } else {
+        token = $("#create > input[name=_token]").val();
+        rss_url = $("#create > .input-group > input[name=url]").val();
+        $.ajax({
+            type: "POST",
+            url: "./añadir",
+            data: {_token: token, url: rss_url},
+            success: function () {
+                location.reload();
+            }
+        }).fail(function () {
+            showAlert("No se pudo añadir la fuente de noticias proporcionada.", "error");
+        });
     }
-    // else{
-    //     Código para añadir en enlace
-    // }
 })
 
-btnUpdate.addEventListener('click', function(){
-    spinnerUpdate.style.visibility = "visible";
-    setTimeout(function(){
-        spinnerUpdate.style.visibility = "hidden";
-    }, 2500);
+btnUpdate.addEventListener('click', function(e){
+    e.preventDefault();
+    $('#updateSpinner').toggleClass('d-inline-block');
+    $('#updateSpinner').toggleClass('d-none');
+
+    token = $("#update > input[name=_token]").val();
+
+    $.ajax({
+        type: "POST",
+        url: "./actualizar",
+        data: {_token: token},
+        success: function () {
+            location.reload();
+        }
+    }).fail(function () {
+        $('#updateSpinner').toggleClass('d-inline-block');
+        $('#updateSpinner').toggleClass('d-none');
+        showAlert("No se pudo añadir la fuente de noticias proporcionada.", "error");
+    });
 })
 
