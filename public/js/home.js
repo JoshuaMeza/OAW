@@ -18,7 +18,7 @@ class New {
     toString() {
         return '<div class="col-5 mb-3"><div class="card"><div class="card-body"><h5 class="card-title">'+ this.title +
         '</h5><h6 class="card-subtitle mb-2 text-muted">' + this.date + '</h6><p class="card-text">' + this.description + '</p>' +
-        '<p class="card-text text-muted fst-italic">' + this.categories + '</p><a href="#" class="card-link">' + this.url +
+        '<p class="card-text text-muted fst-italic">' + this.categories + '</p><a href="' + this.url + '" class="card-link">' + this.url +
         '</a></div></div></div>';
     }
 }
