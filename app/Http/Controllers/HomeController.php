@@ -21,13 +21,16 @@ class HomeController extends Controller
     public function create(Request $request)
     {
         $input = $request->collect();
+
         if ($input['url']) {
             $id = DB::table('rsses')->insertGetId(
                 ['url' => $input['url']]
             );
+
             return response("", 200)
                 ->header('Content-Type', 'text/plain');
         }
+
         return response("", 500)
             ->header('Content-Type', 'text/plain');
     }
@@ -73,7 +76,7 @@ class HomeController extends Controller
                 ->header('Content-Type', 'text/plain');
         }
 
-        return response('', 200)
+        return response('', 500)
             ->header('Content-Type', 'text/plain');
     }
 
