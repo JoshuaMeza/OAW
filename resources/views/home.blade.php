@@ -115,6 +115,8 @@
                     </tbody>
                 </table>
             </div>
+
+            
         </section>
 
         <section>
@@ -157,5 +159,8 @@
     </div>
 @endsection
 @section('custom-js')
+<script type="text/javascript">
+    const listNews= @json($news);
+</script>
     <script src="./js/home.js"></script>
 @endsection
