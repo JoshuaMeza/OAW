@@ -63,16 +63,20 @@ class HomeController extends Controller
 
             foreach ($feed->get_items() as $item) {
                 $categoryString = '';
+                $description = $item->get_description();
 
                 foreach ($item->get_categories() as $category) {
                     $categoryString .= $category . ',';
+                }
+                if (strlen($description) > 500) {
+                    $description = substr($description, 0, 499);
                 }
 
                 DB::table('noticias')->insert([
                     'date' => $item->get_date(),
                     'title' => $item->get_title(),
                     'url' => $item->get_link(),
-                    'description' => $item->get_description(),
+                    'description' => $description,
                     'categories' => $categoryString
                 ]);
             }

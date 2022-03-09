@@ -145,12 +145,11 @@ btnAddNew.addEventListener('click', function(e){
     if(RSSLink.value.length == 0){
         showAlert("Debe proporcionar una url.", "error");
     } else {
-        token = $("#create > input[name=_token]").val();
         rss_url = $("#create > .input-group > input[name=url]").val();
         $.ajax({
             type: "POST",
             url: "./añadir",
-            data: {_token: token, url: rss_url},
+            data: { url: rss_url},
             success: function () {
                 location.reload();
             }
@@ -170,7 +169,7 @@ btnUpdate.addEventListener('click', function(e){
     $.ajax({
         type: "POST",
         url: "./actualizar",
-        data: {_token: token},
+        data: {},
         success: function () {
             location.reload();
         }
@@ -181,3 +180,21 @@ btnUpdate.addEventListener('click', function(e){
     });
 })
 
+$(".delete-form").click(function (e) {
+    e.preventDefault();
+    id = $(this).data("id");
+
+    $.ajax({
+        type: "POST",
+        url: "./eliminar",
+        data: {id: id},
+        success: function () {
+            location.reload();
+        }
+    }).fail(function () {
+        showAlert("No se pudo eliminar la fuente de noticias seleccionada.", "error");
+    });
+
+    // Bug fix: triggering twice
+    return false;
+})
