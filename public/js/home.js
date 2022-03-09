@@ -141,13 +141,27 @@ const filterNews = function(){
 };
 
 btnAddNew.addEventListener('click', function(e){
+    e.preventDefault();
+
     if(RSSLink.value.length == 0){
         showAlert("Debe proporcionar una url.", "error");
-        e.preventDefault();
+    } else {
+        token = $("#create > input[name=_token]").val();
+        rss_url = $("#create > .input-group > input[name=url]").val();
+
+        $.ajax({
+            type: "POST",
+            url: "./añadir",
+            data: {_token: token, url: rss_url},
+            success: function (data) {
+                // DO SOMETHING
+                console.log(data);
+            },
+            dataType: "text"
+        }).fail(function () {
+            showAlert("No se pudo añadir la fuente de noticias proporcionada.", "error");
+        });
     }
-    // else{
-    //     Código para añadir en enlace
-    // }
 })
 
 btnUpdate.addEventListener('click', function(){
