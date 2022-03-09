@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rss', function (Blueprint $table) {
+        Schema::create('rsses', function (Blueprint $table) {
             $table->id();
             $table->string('url');
             $table->timestamps();

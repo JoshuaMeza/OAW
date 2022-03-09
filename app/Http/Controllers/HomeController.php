@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Rss;
 use App\Models\Noticia;
 use Illuminate\Support\Facades\DB;
+use SimplePie;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        $rss['rss'] = Rss::orderBy('id','desc')->paginate(5);
+        $rss['rss'] = Rss::orderBy('id', 'asc')->paginate();
 
         // Output
         return view('home', $rss);
@@ -23,13 +25,13 @@ class HomeController extends Controller
             $id = DB::table('rsses')->insertGetId(
                 ['url' => $input['url']]
             );
-            return response("",200)
+            return response("", 200)
                 ->header('Content-Type', 'text/plain');
         }
-        return response("",500)
-                ->header('Content-Type', 'text/plain');
+        return response("", 500)
+            ->header('Content-Type', 'text/plain');
     }
-    
+
     public function read(Request $request)
     {
         // Get news from database
@@ -38,6 +40,41 @@ class HomeController extends Controller
     public function update(Request $request)
     {
         // Update database news based on RSS's
+        $feed = new SimplePie();
+        $responses = DB::table('rsses')->select('url')->get();
+        $urls = array();
+
+        foreach ($responses as $response) {
+            array_push($urls, $response->url);
+        }
+
+        if ($urls) {
+            $deleted = DB::table('noticias')->delete();
+            $feed->set_feed_url($urls);
+            $feed->enable_cache(false);
+            $feed->init();
+
+            foreach ($feed->get_items() as $item) {
+                $categoryString = '';
+
+                foreach ($item->get_categories() as $category) {
+                    $categoryString .= $category . ',';
+                }
+
+                DB::table('noticias')->insert([
+                    'date' => $item->get_date(),
+                    'title' => $item->get_title(),
+                    'description' => $item->get_description(),
+                    'categories' => $categoryString
+                ]);
+            }
+
+            return response('', 200)
+                ->header('Content-Type', 'text/plain');
+        }
+
+        return response('', 200)
+            ->header('Content-Type', 'text/plain');
     }
 
     public function delete(Request $request)

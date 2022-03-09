@@ -3,7 +3,6 @@ const searchContent = document.getElementById('search-content');
 const btnAddNew = document.getElementById('btnAddNew');
 const RSSLink = document.getElementById('RSSLink');
 const btnUpdate = document.getElementById('btnUpdate');
-const spinnerUpdate = document.getElementById('spinnerUpdate');
 
 //  Formato de fecha: YYYY/MM/DD
 var news = [];
@@ -153,8 +152,7 @@ btnAddNew.addEventListener('click', function(e){
             url: "./añadir",
             data: {_token: token, url: rss_url},
             success: function () {
-                // DO SOMETHING
-                console.log("success");
+                location.reload();
             }
         }).fail(function () {
             showAlert("No se pudo añadir la fuente de noticias proporcionada.", "error");
@@ -162,10 +160,24 @@ btnAddNew.addEventListener('click', function(e){
     }
 })
 
-btnUpdate.addEventListener('click', function(){
-    spinnerUpdate.style.visibility = "visible";
-    setTimeout(function(){
-        spinnerUpdate.style.visibility = "hidden";
-    }, 2500);
+btnUpdate.addEventListener('click', function(e){
+    e.preventDefault();
+    $('#updateSpinner').toggleClass('d-inline-block');
+    $('#updateSpinner').toggleClass('d-none');
+
+    token = $("#update > input[name=_token]").val();
+
+    $.ajax({
+        type: "POST",
+        url: "./actualizar",
+        data: {_token: token},
+        success: function () {
+            location.reload();
+        }
+    }).fail(function () {
+        $('#updateSpinner').toggleClass('d-inline-block');
+        $('#updateSpinner').toggleClass('d-none');
+        showAlert("No se pudo añadir la fuente de noticias proporcionada.", "error");
+    });
 })
 

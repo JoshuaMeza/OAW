@@ -63,12 +63,12 @@
 
             <!-- Update and add button -->
             <div class="container-fluid mb-3 d-flex justify-content-evenly">
-                <div class="spinner-border text-primary" role="status" style="visibility: hidden;" id="spinnerUpdate">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
                 <form id="update">
                     @csrf
-                    <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar</button>
+                    <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar <div
+                            class="spinner-border spinner-border-sm d-none" role="status" id="updateSpinner">
+                            <span class="visually-hidden">Loading...</span>
+                        </div></button>
                 </form>
                 <form id="create">
                     @csrf
