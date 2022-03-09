@@ -148,7 +148,6 @@ btnAddNew.addEventListener('click', function(e){
     } else {
         token = $("#create > input[name=_token]").val();
         rss_url = $("#create > .input-group > input[name=url]").val();
-        console.log(token, rss_url);
         $.ajax({
             type: "POST",
             url: "./añadir",
