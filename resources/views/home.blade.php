@@ -64,14 +64,12 @@
             <!-- Update and add button -->
             <div class="container-fluid mb-3 d-flex justify-content-evenly">
                 <form id="update">
-                    @csrf
                     <button type="submit" class="btn btn-primary" id="btnUpdate">Actualizar <div
                             class="spinner-border spinner-border-sm d-none" role="status" id="updateSpinner">
                             <span class="visually-hidden">Loading...</span>
                         </div></button>
                 </form>
                 <form id="create">
-                    @csrf
                     <div class="input-group">
                         <input type="text" class="form-control" name="url" placeholder="Enlace de RSS" id="RSSLink">
                         <button type="submit" class="btn btn-success" id="btnAddNew">Añadir</button>
@@ -98,9 +96,8 @@
                             <td><?php echo $register['url']; ?></td>
                             <td>
                                 <form class="delete-form">
-                                    @csrf
-                                    <input type="hidden" name="link-id" value="<?php echo $register['id']; ?>">
-                                    <button type="submit" class="btn btn-outline-danger">
+                                    <button type="submit" class="btn btn-outline-danger delete-form"
+                                        data-id="<?php echo $register['id']; ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                             class="bi bi-trash3" viewBox="0 0 16 16">
                                             <path
