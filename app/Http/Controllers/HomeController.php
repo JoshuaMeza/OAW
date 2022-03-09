@@ -13,9 +13,10 @@ class HomeController extends Controller
     public function index()
     {
         $rss['rss'] = Rss::orderBy('id', 'asc')->paginate();
+        $news['news'] = Noticia::orderBy('date', 'asc')->paginate();
 
         // Output
-        return view('home', $rss);
+        return view('home', $rss, $news);
     }
 
     public function create(Request $request)
@@ -37,7 +38,10 @@ class HomeController extends Controller
 
     public function read(Request $request)
     {
-        // Get news from database
+        $news['news'] = Noticia::orderBy('date', 'asc')->paginate();
+
+        // Output
+        return view('home', $news);
     }
 
     public function update(Request $request)
@@ -59,24 +63,20 @@ class HomeController extends Controller
 
             foreach ($feed->get_items() as $item) {
                 $categoryString = '';
-                $description = $item->get_description();
 
                 foreach ($item->get_categories() as $category) {
                     $categoryString .= $category . ',';
                 }
 
-                if (strlen($description) > 500) {
-                    $description = substr($description, 0, 499);
-                }
-
                 DB::table('noticias')->insert([
                     'date' => $item->get_date(),
                     'title' => $item->get_title(),
-                    'description' => $description,
+                    'url' => $item->get_link(),
+                    'description' => $item->get_description(),
                     'categories' => $categoryString
                 ]);
             }
-
+            
             return response('', 200)
                 ->header('Content-Type', 'text/plain');
         }

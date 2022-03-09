@@ -3,9 +3,8 @@ const searchContent = document.getElementById('search-content');
 const btnAddNew = document.getElementById('btnAddNew');
 const RSSLink = document.getElementById('RSSLink');
 const btnUpdate = document.getElementById('btnUpdate');
-
+const news = [];
 //  Formato de fecha: YYYY/MM/DD
-var news = [];
 
 class New {
     constructor(title, date, url, description, categories) {
@@ -24,6 +23,7 @@ class New {
     }
 }
 
+listNews.data.forEach(element=>news.push(new New(element.title, element.date, element.url, element.description, element.categories)));
 document.addEventListener('DOMContentLoaded', function() {
     sortNews(news);
 });
@@ -145,12 +145,12 @@ btnAddNew.addEventListener('click', function(e){
     if(RSSLink.value.length == 0){
         showAlert("Debe proporcionar una url.", "error");
     } else {
+        token = $("#create > input[name=_token]").val();
         rss_url = $("#create > .input-group > input[name=url]").val();
-
         $.ajax({
             type: "POST",
             url: "./añadir",
-            data: {url: rss_url},
+            data: {_token: token, url: rss_url},
             success: function () {
                 location.reload();
             }
@@ -162,38 +162,22 @@ btnAddNew.addEventListener('click', function(e){
 
 btnUpdate.addEventListener('click', function(e){
     e.preventDefault();
-    $("#updateSpinner").toggleClass("d-inline-block");
-    $("#updateSpinner").toggleClass("d-none");
+    $('#updateSpinner').toggleClass('d-inline-block');
+    $('#updateSpinner').toggleClass('d-none');
+
+    token = $("#update > input[name=_token]").val();
 
     $.ajax({
         type: "POST",
         url: "./actualizar",
-        data: {},
+        data: {_token: token},
         success: function () {
             location.reload();
         }
     }).fail(function () {
-        $("#updateSpinner").toggleClass("d-inline-block");
-        $("#updateSpinner").toggleClass("d-none");
+        $('#updateSpinner').toggleClass('d-inline-block');
+        $('#updateSpinner').toggleClass('d-none');
         showAlert("No se pudo añadir la fuente de noticias proporcionada.", "error");
     });
 })
 
-$(".delete-form").click(function (e) {
-    e.preventDefault();
-    id = $(this).data("id");
-
-    $.ajax({
-        type: "POST",
-        url: "./eliminar",
-        data: {id: id},
-        success: function () {
-            location.reload();
-        }
-    }).fail(function () {
-        showAlert("No se pudo eliminar la fuente de noticias seleccionada.", "error");
-    });
-
-    // Bug fix: triggering twice
-    return false;
-})
