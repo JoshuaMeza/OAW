@@ -21,8 +21,8 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-            <img src="./favicon.png" alt="" class="d-inline-block align-text-top">
-            <span class="navbar-brand mb-0 h1">Noticias</span>
+                <img src="./favicon.png" alt="" class="d-inline-block align-text-top">
+                <span class="navbar-brand mb-0 h1">Noticias</span>
             </a>
         </div>
     </nav>
@@ -34,8 +34,8 @@
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/alerts.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     @yield('custom-js')
 </body>
 
