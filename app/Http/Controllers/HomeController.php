@@ -3,33 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Rss;
+use App\Models\Noticia;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index()
     {
-        // Retrieve RSS sources
-        $rss = [];
-
-        // TEST: ADD SOME STATIC RSS SOURCES
-        $rss[] = ['id' => 0, 'link' => 'http://rss.cnn.com/rss/cnn_latest.rss'];
-        $rss[] = ['id' => 1, 'link' => 'http://www.bbc.co.uk/mundo/temas/internacional/index.xml'];
+        $rss['rss'] = Rss::orderBy('id','desc')->paginate(5);
 
         // Output
-        return view('home', ['rss' => $rss]);
+        return view('home', $rss);
     }
 
     public function create(Request $request)
     {
         $input = $request->collect();
         if ($input['url']) {
-            return response($input['url'], 200)
+            $id = DB::table('rsses')->insertGetId(
+                ['url' => $input['url']]
+            );
+            return response("",200)
                 ->header('Content-Type', 'text/plain');
         }
-
-        return "Nada";
+        return response("",500)
+                ->header('Content-Type', 'text/plain');
     }
-
+    
     public function read(Request $request)
     {
         // Get news from database

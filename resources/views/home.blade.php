@@ -95,7 +95,7 @@
                     ?>
                         <tr>
                             <th scope="row"><?php echo $register['id']; ?></th>
-                            <td><?php echo $register['link']; ?></td>
+                            <td><?php echo $register['url']; ?></td>
                             <td>
                                 <form class="delete-form">
                                     @csrf
