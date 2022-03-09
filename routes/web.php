@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', [HomeController::class,'index']);
     Route::post('/añadir', 'create');
     Route::post('/eliminar', 'delete');
     Route::post('/actualizar', 'update');
     Route::post('/leer', 'read');
+    Route::resource('views',HomeController::class);
 });
