@@ -50,13 +50,13 @@ class HomeController extends Controller
         $feed = new SimplePie();
         $responses = DB::table('rsses')->select('url')->get();
         $urls = array();
+        $deleted = DB::table('noticias')->delete();
 
         foreach ($responses as $response) {
             array_push($urls, $response->url);
         }
 
         if ($urls) {
-            $deleted = DB::table('noticias')->delete();
             $feed->set_feed_url($urls);
             $feed->enable_cache(false);
             $feed->init();
@@ -80,12 +80,9 @@ class HomeController extends Controller
                     'categories' => $categoryString
                 ]);
             }
-            
-            return response('', 200)
-                ->header('Content-Type', 'text/plain');
         }
 
-        return response('', 500)
+        return response('', 200)
             ->header('Content-Type', 'text/plain');
     }
 
