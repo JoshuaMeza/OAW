@@ -5,7 +5,6 @@ const RSSLink = document.getElementById('RSSLink');
 const btnUpdate = document.getElementById('btnUpdate');
 const spinnerUpdate = document.getElementById('spinnerUpdate');
 
-// TEST: STATIC NEWS AND SHOW THEM
 //  Formato de fecha: YYYY/MM/DD
 var news = [];
 
@@ -26,12 +25,6 @@ class New {
     }
 }
 
-//  Noticias de ejemplo
-// news[0] = new New("Reunión de preparatorianos en torno al deporte", "2022/02/26", "www.uady.com", "Celebran la tradicional carrera “Vuelve a Casa”", "Espectaculos, Tecnologia");
-// news[1] = new New("Firma de convenio con la CANIRAC Yucatán", "2022/02/12", "www.modelo.com", "Convenio de colaboración entre nuestra institución y la Cámara Nacional de la Industria de Restaurantes y Alimentos Condimentados delegación Yucatán", "Espectaculos");
-// news[2] = new New("Creatividad con reciclaje: The Precious Plastic Universe", "2022/01/23", "www.anahuac.com", "El reciclaje puede hacer una gran diferencia para que nuestro mundo sea más sustentable. Y con ayuda de la creatividad se pueden explorar alternativas para la reutilización del plástico en el campo del diseño.", "Tecnologia");
-
-
 document.addEventListener('DOMContentLoaded', function() {
     sortNews(news);
 });
@@ -39,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const sortNews = function(news){
     selectionValue = selectionBox.value;
     switch(selectionValue){
-        case "title": 
+        case "title":
             news.sort((object1, object2) =>{
                 if(object1.title < object2.title){
                     return -1;
@@ -48,7 +41,7 @@ const sortNews = function(news){
                 } else return 0;
             });
             break;
-        case "url": 
+        case "url":
             news.sort((object1, object2) =>{
                 if(object1.url < object2.url){
                     return -1;
@@ -88,14 +81,12 @@ const sortNews = function(news){
                 });
             }
             break;
-        
+
     }
     showNews(news);
 }
 
 selectionBox.addEventListener('change', function(){
-    console.log(searchContent.value.toLowerCase().length);
-    console.log(news.length);
     if(searchContent.value.toLowerCase().length > 0){
         filterNews();
     }
@@ -111,7 +102,7 @@ function showNews(news) {
     if(news.length > 0){
         news.forEach(element => {
         outputBox.append(element.toString());
-        }); 
+        });
     } else{
         showAlert("No se ha encontrado ninguna noticia, favor de añadir una url de algún feed.", "error");
     }

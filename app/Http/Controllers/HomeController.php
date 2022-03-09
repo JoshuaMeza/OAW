@@ -21,7 +21,13 @@ class HomeController extends Controller
 
     public function create(Request $request)
     {
-        // Add RSS to db
+        $input = $request->collect();
+        if ($input['url']) {
+            return response($input['url'], 200)
+                ->header('Content-Type', 'text/plain');
+        }
+
+        return "Nada";
     }
 
     public function read(Request $request)

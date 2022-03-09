@@ -11,13 +11,17 @@
 @section('content')
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner" style="background-color: rgb(100, 100, 100); background-blend-mode: soft-light;">
             <div class="carousel-item active" data-bs-interval="10000">
-                <a href="https://uady.mx/#/noticias/url/reunion-de-preparatorianos-en-torno-al-deporte-uady" target="_blanck">
+                <a href="https://uady.mx/#/noticias/url/reunion-de-preparatorianos-en-torno-al-deporte-uady"
+                    target="_blanck">
                     <img src="./img/img1.jpg" class="d-block w-100" alt="noticia1" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
@@ -33,7 +37,8 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <a href="https://uady.mx/#/noticias/url/es-necesario-repensar-la-educacion-y-su-sistema-williams-uady" target="_blanck">
+                <a href="https://uady.mx/#/noticias/url/es-necesario-repensar-la-educacion-y-su-sistema-williams-uady"
+                    target="_blanck">
                     <img src="./img/img3.png" class="d-block w-100" alt="noticia3" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
@@ -52,7 +57,7 @@
     </div>
     <div class="container">
 
-    <br><br>
+        <br><br>
 
         <section>
 
@@ -68,7 +73,7 @@
                 <form id="create">
                     @csrf
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enlace de RSS" id="RSSLink">
+                        <input type="text" class="form-control" name="url" placeholder="Enlace de RSS" id="RSSLink">
                         <button type="submit" class="btn btn-success" id="btnAddNew">Añadir</button>
                     </div>
                 </form>
@@ -96,9 +101,11 @@
                                     @csrf
                                     <input type="hidden" name="link-id" value="<?php echo $register['id']; ?>">
                                     <button type="submit" class="btn btn-outline-danger">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                    </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path
+                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                        </svg>
                                     </button>
                                 </form>
                             </td>
