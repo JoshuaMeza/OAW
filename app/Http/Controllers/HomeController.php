@@ -12,8 +12,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $rss['rss'] = Rss::orderBy('id', 'asc')->paginate();
-        $news['news'] = Noticia::orderBy('date', 'asc')->paginate();
+        $rss['rss'] = Rss::orderBy('id', 'asc')->paginate(15);
+        $news['news'] = Noticia::orderBy('date', 'desc')->paginate(50);
 
         // Output
         return view('home', $rss, $news);
@@ -62,20 +62,22 @@ class HomeController extends Controller
             $feed->init();
 
             foreach ($feed->get_items() as $item) {
+                $date = $this->limit($item->get_date(), 100);
+                $title = $this->limit($item->get_title(), 255);
+                $url = $this->limit($item->get_link(), 300);
+                $description = $this->limit($item->get_description(), 500);
                 $categoryString = '';
-                $description = $item->get_description();
 
                 foreach ($item->get_categories() as $category) {
                     $categoryString .= $category . ',';
                 }
-                if (strlen($description) > 500) {
-                    $description = substr($description, 0, 499);
-                }
+
+                $categoryString = $this->limit($categoryString, 100);
 
                 DB::table('noticias')->insert([
-                    'date' => $item->get_date(),
-                    'title' => $item->get_title(),
-                    'url' => $item->get_link(),
+                    'date' => $date,
+                    'title' => $title,
+                    'url' => $url,
                     'description' => $description,
                     'categories' => $categoryString
                 ]);
@@ -84,6 +86,11 @@ class HomeController extends Controller
 
         return response('', 200)
             ->header('Content-Type', 'text/plain');
+    }
+
+    private function limit(String $text, int $max)
+    {
+        return strlen($text) > $max ? substr($text, 0, $max - 1) : $text;
     }
 
     public function delete(Request $request)
