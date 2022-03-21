@@ -96,7 +96,7 @@
                             <td><?php echo $register['url']; ?></td>
                             <td>
                                 <form class="delete-form">
-                                <button type="submit" class="btn btn-outline-danger delete-form"
+                                    <button type="submit" class="btn btn-outline-danger delete-form"
                                         data-id="<?php echo $register['id']; ?>">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                             class="bi bi-trash3" viewBox="0 0 16 16">
@@ -114,7 +114,7 @@
                 </table>
             </div>
 
-            
+
         </section>
 
         <section>
@@ -157,8 +157,8 @@
     </div>
 @endsection
 @section('custom-js')
-<script type="text/javascript">
-    const listNews= @json($news);
-</script>
-    <script src="./js/home.js"></script>
+    <script type="text/javascript">
+        const listNews = @json($news);
+    </script>
+    <script src="./js/home_compiled.js"></script>
 @endsection
