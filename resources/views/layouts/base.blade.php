@@ -8,9 +8,10 @@
     <meta name="authors" content="@yield('authors')">
     <meta name="keywords" content="@yield('keywords')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name=description content="Lector Web de RSS feeds personalizable.">
     <title>@yield('title')</title>
     <!-- Icon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" srcset="favicon2.ico 1x,favicon.ico 2x" sizes="64vw">
     <!-- Style -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
