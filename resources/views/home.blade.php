@@ -30,7 +30,7 @@
             </div>
             <div class="carousel-item" data-bs-interval="2000">
                 <a href="https://uady.mx/#/noticias/url/deportistas-festejan-centenario-de-la-uady" target="_blanck">
-                    <img src="./img/img2.png" class="d-block w-100" alt="noticia2" style="opacity: 0.5;">
+                    <img src="./img/img2.jpg" class="d-block w-100" alt="noticia2" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h4>Nutrida participación en tradicional carrera</h4>
@@ -39,7 +39,7 @@
             <div class="carousel-item">
                 <a href="https://uady.mx/#/noticias/url/es-necesario-repensar-la-educacion-y-su-sistema-williams-uady"
                     target="_blanck">
-                    <img src="./img/img3.png" class="d-block w-100" alt="noticia3" style="opacity: 0.5;">
+                    <img src="./img/img3.jpg" class="d-block w-100" alt="noticia3" style="opacity: 0.5;">
                 </a>
                 <div class="carousel-caption d-none d-md-block">
                     <h4>Destaca el rector los retos académicos para un nuevo siglo</h4>
