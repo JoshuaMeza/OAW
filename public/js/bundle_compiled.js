@@ -1,0 +1,2 @@
+$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}});
+function showAlert(a,b){"error"==b.toLowerCase()?Swal.mixin({toast:!0,position:"top-end",showConfirmButton:!1,timer:2E3}).fire({icon:"warning",title:a}):"success"==b.toLowerCase()&&Swal.mixin({toast:!0,position:"top-end",showConfirmButton:!1,timer:2E3,timerProgressBar:!0,didOpen:c=>{c.addEventListener("mouseenter",Swal.stopTimer);c.addEventListener("mouseleave",Swal.resumeTimer)}}).fire({icon:"success",title:a})};
