@@ -2,4 +2,91 @@
                         foreach ($rss as $register) {
                     ?><tr><th scope=row><?php echo $register['id']; ?><td><?php echo $register['url']; ?><td><form class=delete-form><button type=submit class="btn btn-outline-danger delete-form"data-id="<?php echo $register['id']; ?>"><svg class="bi bi-trash3"fill=currentColor height=16 viewBox="0 0 16 16"width=16 xmlns=http://www.w3.org/2000/svg><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/></svg></button></form></tr><?php
                         }
-                    ?></table></div></section><section><h2 class="mb-3 text-center">Bandeja de resultados</h2><div class="d-flex justify-content-center"><div class="mb-3 input-group"><span class=input-group-text id=search-desc><svg class="bi bi-search"fill=currentColor height=16 viewBox="0 0 16 16"width=16 xmlns=http://www.w3.org/2000/svg><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg></span><input class=form-control id=search-content placeholder=Buscar aria-describedby=search-desc></div><div class="mb-3 input-group ms-3"><span class=input-group-text id=sort-desc><svg class="bi bi-funnel"fill=currentColor height=16 viewBox="0 0 16 16"width=16 xmlns=http://www.w3.org/2000/svg><path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z"/></svg></span><select aria-describedby=sort-desc class=form-select id=sort-selection><option value=date selected>Fecha<option value=title>Título<option value=url>URL<option value=description>Descripción<option value=categories>Categorías</select></div></div><div class=container-fluid><div class="d-flex justify-content-evenly row"id=news-box></div></div></section></div>@endsection @section('custom-js')<script>const listNews = @json($news);</script><script src=./js/home_compiled.js></script>@endsection
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </section>
+
+        <section>
+            <h2 class="text-center mb-3">Bandeja de resultados</h2>
+
+            <!-- Search and sort box -->
+            <div class="d-flex justify-content-center">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="search-desc"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg></span>
+                    <input type="text" class="form-control" placeholder="Buscar" aria-describedby="search-desc"
+                        id="search-content">
+                </div>
+
+                <div class="input-group mb-3 ms-3">
+                    <span class="input-group-text" id="sort-desc"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                            <path
+                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+                        </svg></span>
+                    <select class="form-select" aria-describedby="sort-desc" id="sort-selection">
+                        <option value="date" selected>Fecha</option>
+                        <option value="title">Título</option>
+                        <option value="url">URL</option>
+                        <option value="description">Descripción</option>
+                        <option value="categories">Categorías</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Output box -->
+            <div class="container-fluid">
+                <div class="row d-flex justify-content-evenly" id="news-box">
+                </div>
+            </div>
+        </section>
+    </div>
+@endsection
+@section('custom-js')
+    <script type="text/javascript">
+        const listNews = @json($news);
+    </script>
+    <script src="./js/home_compiled.js"></script>
+    <script>
+        $(function ()
+        {
+            'use strict';
+
+            $(document).on('keyup', '#search-content', function ()
+            {
+                if($(this).val().length > 0)
+                {
+                    var search = $(this).val();
+
+                    $.get("{{ route('posts.search') }}", {search: search}, function (res)
+                    {
+                        $('#news-box').html(res);
+                    });
+
+                    return;
+                }
+
+                $('#results').empty();
+            });
+
+            $(document).on('click', '.post-link', function ()
+            {
+                var postId = $(this).data('id');
+
+                $.get("{{ url('posts/show') }}", {id: postId}, function (res)
+                {
+                    $('#results').empty();
+                    $('.search').val('');
+                    $('#post').html(res);
+                });
+            });
+        });
+        </script>
+@endsection
