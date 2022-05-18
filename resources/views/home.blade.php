@@ -161,4 +161,39 @@
         const listNews = @json($news);
     </script>
     <script src="./js/home_compiled.js"></script>
+    <script>
+        $(function ()
+        {
+            'use strict';
+
+            $(document).on('keyup', '#search-content', function ()
+            {
+                if($(this).val().length > 0)
+                {
+                    var search = $(this).val();
+
+                    $.get("{{ route('posts.search') }}", {search: search}, function (res)
+                    {
+                        $('#news-box').html(res);
+                    });
+
+                    return;
+                }
+
+                $('#results').empty();
+            });
+
+            $(document).on('click', '.post-link', function ()
+            {
+                var postId = $(this).data('id');
+
+                $.get("{{ url('posts/show') }}", {id: postId}, function (res)
+                {
+                    $('#results').empty();
+                    $('.search').val('');
+                    $('#post').html(res);
+                });
+            });
+        });
+        </script>
 @endsection
