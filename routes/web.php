@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', [HomeController::class,'index']);
+    Route::get('/posts', [HomeController::class,'index']);
     Route::post('/añadir', 'create');
     Route::post('/eliminar', 'delete');
     Route::post('/actualizar', 'update');
     Route::post('/leer', 'read');
     Route::resource('views',HomeController::class);
+    Route::get('/posts/search',[HomeController::class, 'search'])->name('posts.search');
+    Route::get('/posts/show',[HomeController::class, 'show'])->name('posts.show');
+    Route::post('/posts/filter',[HomeController::class, 'filter'])->name('posts.filter');
 });

@@ -108,4 +108,24 @@ class HomeController extends Controller
         return response("", 500)
             ->header('Content-Type', 'text/plain');
     }
+    public function search(Request $request){
+        $results = Noticia::where('title', 'LIKE', "%{$request->search}%")->paginate(50);
+        return view('results', compact('results'))->with(['search' => $request->search])->render();
+    }
+    public function show(Request $request){
+        $post = Noticia::findOrFail($request->id);
+        return view('post', compact('post'))->render();
+    }
+
+    public function filter(Request $request){
+        if ($request['search'] != ""){
+            $results = Noticia::where('title', 'LIKE', "%{$request->search}%")
+            ->orderBy($request['type'])
+            ->paginate(50);
+        
+        } else{
+            $results = Noticia::orderBy($request['type'], 'asc')->paginate(50);
+        }
+        return view('results', compact('results'))->with(['search' => $request->search])->render();
+    }
 }
